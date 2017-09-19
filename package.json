@@ -1,0 +1,29 @@
+{
+  "name": "graphql-http-lambda",
+  "version": "1.0.0",
+  "description": "A basic GraphQL Server in NodeJS for AWS Lambda",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "build": "babel src --out-dir graphql-lambda --copy-files --ignore *.spec.js,test-doubles"
+  },
+  "keywords": [
+    "GraphQl",
+    "NodeJs",
+    "Lambda",
+    "AWS"
+  ],
+  "author": "Bill Sourour",
+  "license": "MIT",
+  "devDependencies": {
+    "@playlyfe/gql": "^2.3.2",
+    "babel-jest": "^19.0.0",
+    "babel-plugin-inline-import": "^2.0.6",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-preset-env": "^1.6.0",
+    "jest": "^20.0.0"
+  },
+  "dependencies": {
+    "graphql": "^0.11.3"
+  }
+}
