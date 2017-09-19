@@ -100,14 +100,14 @@ export default function createGetGraphqlResponse ({
   function parseVariables (variables) {
     try {
       return variables && JSON.parse(variables)
-    } catch (e) {
-      if (e instanceof SyntaxError) {
+    } catch (error) {
+      if (error instanceof SyntaxError) {
         throw new HttpError({
           statusCode: 400,
           body: 'Bad Request. Variables property is not a valid JSON string.'
         })
       }
-      throw e
+      throw error
     }
   }
 
@@ -119,14 +119,14 @@ export default function createGetGraphqlResponse ({
         operation: bodyAsJson && bodyAsJson.operation,
         variables: bodyAsJson && bodyAsJson.variables
       }
-    } catch (e) {
-      if (e instanceof SyntaxError) {
+    } catch (error) {
+      if (error instanceof SyntaxError) {
         throw new HttpError({
           statusCode: 400,
           body: 'Bad Request. Body is not a valid JSON string. If you are trying to send graphql as the body, please set your "Content-Type" header to "application/graphql"'
         })
       }
-      throw e
+      throw error
     }
   }
 }
