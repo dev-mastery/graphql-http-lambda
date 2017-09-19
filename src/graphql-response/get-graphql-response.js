@@ -53,15 +53,15 @@ export default function createGetGraphqlResponse ({
         },
         body: JSON.stringify(resolvedQuery)
       }
-    } catch (e) {
-      if (e instanceof HttpError) {
+    } catch (error) {
+      if (error instanceof HttpError) {
         return {
-          body: e.message,
-          headers: e.headers,
-          statusCode: e.statusCode
+          body: error.body,
+          headers: error.headers,
+          statusCode: error.statusCode
         }
       }
-      logger.error(e)
+      logger.error(error)
       return {
         body: 'Internal Server Error',
         statusCode: 500
@@ -78,7 +78,7 @@ export default function createGetGraphqlResponse ({
     throw new HttpError({
       statusCode: 405,
       headers: [{ Accept: ACCEPTED_METHODS.join(', ') }],
-      message: 'Method not allowed. See Accept header for allowed methods.'
+      body: 'Method not allowed. See Accept header for allowed methods.'
     })
   }
 
@@ -86,7 +86,7 @@ export default function createGetGraphqlResponse ({
     if (!query) {
       throw new HttpError({
         statusCode: 400,
-        message: 'Bad Request. Request must contain a GaphQL Query'
+        body: 'Bad Request. Request must contain a GaphQL Query'
       })
     }
   }
@@ -104,7 +104,7 @@ export default function createGetGraphqlResponse ({
       if (e instanceof SyntaxError) {
         throw new HttpError({
           statusCode: 400,
-          message: 'Bad Request. Variables property is not a valid JSON string.'
+          body: 'Bad Request. Variables property is not a valid JSON string.'
         })
       }
       throw e
@@ -123,7 +123,7 @@ export default function createGetGraphqlResponse ({
       if (e instanceof SyntaxError) {
         throw new HttpError({
           statusCode: 400,
-          message: 'Bad Request. Body is not a valid JSON string. If you are trying to send graphql as the body, please set your "Content-Type" header to "application/graphql"'
+          body: 'Bad Request. Body is not a valid JSON string. If you are trying to send graphql as the body, please set your "Content-Type" header to "application/graphql"'
         })
       }
       throw e
