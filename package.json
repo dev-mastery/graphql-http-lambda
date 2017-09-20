@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "build": "babel src --out-dir graphql-lambda --copy-files --ignore *.spec.js,test-doubles"
+    "build": "babel src --out-dir build --copy-files --ignore *.spec.js,test-doubles",
+    "bundle": "npm run test && npm run build && zip ./bundle.zip -r ./build"
   },
   "keywords": [
     "GraphQl",
