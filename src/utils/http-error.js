@@ -1,5 +1,5 @@
 export default class HttpError extends Error {
-  constructor ({ statusCode, body, headers } = {}) {
+  constructor ({ body, headers, statusCode } = {}) {
     super(body)
     this.body = body
     this.headers = headers
